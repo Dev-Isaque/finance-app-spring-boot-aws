@@ -1,77 +1,87 @@
-Finance App
-===========
+# Finance App
 
-Descrição do Projeto
---------------------
+## 📌 Descrição do Projeto
+O **Finance App** é uma aplicação de gestão e controle de finanças pessoais, desenvolvida com **Java Spring Boot** e banco de dados **MySQL AWS**. O objetivo do projeto é permitir que os usuários cadastrem, consultem e gerenciem suas transações financeiras de forma eficiente, além de gerar relatórios e análises para auxiliar no planejamento financeiro.
 
-O **Finance App** é uma aplicação web desenvolvida em **Java Spring Boot** para gestão e controle de finanças pessoais. O objetivo é oferecer uma plataforma intuitiva para gerenciamento de receitas, despesas, relatórios financeiros e análises, permitindo que os usuários tomem decisões financeiras mais informadas.
+## 🛠️ Tecnologias Utilizadas
+- **Backend:** Java 17, Spring Boot, Spring Data JPA, Spring Security
+- **Banco de Dados:** MySQL (AWS RDS)
+- **Frontend:** HTML, CSS, Bootstrap, Thymeleaf
+- **Gerenciamento de Dependências:** Maven
+- **Autenticação:** JWT (JSON Web Token)
+- **Versionamento:** Git e GitHub
 
-Tecnologias Utilizadas
-----------------------
+## 📂 Estrutura do Projeto
+```bash
+finance-app/
+├── src/
+│   ├── main/
+│   │   ├── java/
+│   │   │   ├── com/
+│   │   │   │   ├── isaquesoares/
+│   │   │   │   │   ├── controller/        # Controladores das requisições
+│   │   │   │   │   ├── model/              # Modelos de dados (entidades)
+│   │   │   │   │   ├── repository/         # Repositórios para acesso ao banco de dados
+│   │   │   │   │   ├── service/            # Regras de negócio
+│   │   │   │   │   ├── dto/                # Objetos de transferência de dados
+│   │   │   │   │   ├── security/           # Configuração de segurança (JWT, autenticação)
+│   │   │   ├── application/                # Configurações do Spring Boot
+│   │   ├── resources/
+│   │   │   ├── static/                     # Arquivos estáticos (CSS, JS, imagens)
+│   │   │   ├── templates/                  # Views Thymeleaf
+│   │   │   └── application.properties      # Configurações da aplicação
+├── pom.xml                                  # Dependências do Maven
+└── README.md                                # Documentação do projeto
+```
 
-*   **Back-end**: Java, Spring Boot, Spring Security, JPA/Hibernate
-    
-*   **Banco de Dados**: MySQL (Amazon RDS)
-    
-*   **Front-end**: HTML, CSS, Bootstrap, jQuery, Thymeleaf
-    
-*   **Infraestrutura**: AWS RDS para MySQL
-    
+## 📌 Funcionalidades
+- **Autenticação e Cadastro de Usuários**
+  - Cadastro de usuários com criptografia de senha
+  - Login com autenticação JWT
+  - Controle de acesso baseado em permissões
 
-Funcionalidades
----------------
+- **Gestão Financeira**
+  - Cadastro de receitas e despesas
+  - Classificação por categorias
+  - Relatórios financeiros mensais e anuais
+  - Gráficos interativos de análise
 
-*   **Autenticação e Autorizção** (Login e Cadastro de usuários)
-    
-*   **Gerenciamento de Transações** (Receitas e Despesas)
-    
-*   **Categorias Financeiras** (Organização de gastos e ganhos)
-    
-*   **Geração de Relatórios** (Gráficos e tabelas)
-    
-*   **Dashboard Interativo**
-    
-*   **Configurações Personalizadas**
-    
+- **Configurações e Personalização**
+  - Edição de perfil do usuário
+  - Definição de metas financeiras
+  - Exportação de dados para CSV
 
-Estrutura do Projeto
---------------------
+## 🚀 Como Executar o Projeto
+### 🔧 Pré-requisitos
+Antes de rodar o projeto, certifique-se de ter instalado:
+- **Java 17**
+- **MySQL AWS** configurado
+- **Maven**
 
-Plain textANTLR4BashCC#CSSCoffeeScriptCMakeDartDjangoDockerEJSErlangGitGoGraphQLGroovyHTMLJavaJavaScriptJSONJSXKotlinLaTeXLessLuaMakefileMarkdownMATLABMarkupObjective-CPerlPHPPowerShell.propertiesProtocol BuffersPythonRRubySass (Sass)Sass (Scss)SchemeSQLShellSwiftSVGTSXTypeScriptWebAssemblyYAMLXML`   finance-app/  ├── src/  │   ├── main/  │   │   ├── java/  │   │   │   ├── com/  │   │   │   │   ├── isaquesoares/  │   │   │   │   │   ├── controller/        # Controladores  │   │   │   │   │   ├── model/             # Modelos de dados (Entidades)  │   │   │   │   │   ├── repository/        # Repositórios para banco de dados  │   │   │   │   │   ├── service/           # Regras de negócio  │   │   │   │   │   ├── dto/               # Transferência de dados  │   │   │   ├── application/               # Configurações do Spring Boot  │   │   ├── resources/  │   │   │   ├── static/                    # CSS, JS, imagens  │   │   │   ├── templates/                 # Páginas Thymeleaf  │   │   │   └── application.properties     # Configuração do banco de dados  ├── pom.xml                                 # Dependências Maven  ├── README.md                               # Documentação do projeto   `
+### 🏃 Rodando a Aplicação
+1. Clone o repositório:
+   ```bash
+   git clone https://github.com/Dev-Isaque/finance-app.git
+   ```
+2. Configure o banco de dados no **application.properties**:
+   ```properties
+   spring.datasource.url=jdbc:mysql://seu-banco.mysql.aws.com:3306/finance_db
+   spring.datasource.username=seu_usuario
+   spring.datasource.password=sua_senha
+   spring.jpa.hibernate.ddl-auto=update
+   ```
+3. Compile e execute o projeto:
+   ```bash
+   mvn spring-boot:run
+   ```
+4. Acesse a aplicação no navegador:
+   ```
+   http://localhost:8080
+   ```
 
-Configuração do Banco de Dados (AWS RDS)
-----------------------------------------
+## 📜 Licença
+Este projeto está sob a licença MIT. Sinta-se à vontade para utilizá-lo e modificá-lo conforme necessário.
 
-1.  Criar uma instância MySQL no **Amazon RDS**
-    
-2.  spring.datasource.url=jdbc:mysql://seu-endereco-rds.amazonaws.com:3306/finance\_dbspring.datasource.username=seu\_usuariospring.datasource.password=sua\_senhaspring.datasource.driver-class-name=com.mysql.cj.jdbc.Driverspring.jpa.database-platform=org.hibernate.dialect.MySQL8Dialect
-    
-3.  Criar as tabelas usando Hibernate (ou executar um script SQL manualmente)
-    
-
-Como Rodar o Projeto
---------------------
-
-1.  Clonar o repositório
-    
-2.  Configurar o banco de dados no **application.properties**
-    
-3.  mvn spring-boot:run
-    
-
-Melhorias Futuras
------------------
-
-*   Implementação de API REST para integração com aplicativos externos
-    
-*   Suporte para múltiplas moedas
-    
-*   Exportação de relatórios em PDF/Excel
-    
-*   Integração com serviços de pagamento
-    
-
-Autor
------
-
-Desenvolvido por **Isaque Soares**
+---
+📌 **Autor:** [Isaque Soares](https://github.com/Dev-Isaque)  
+📌 **Repositório:** [Finance App no GitHub](https://github.com/Dev-Isaque/finance-app-spring-boot-aws)
