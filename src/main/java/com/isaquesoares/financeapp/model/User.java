@@ -1,16 +1,20 @@
 package com.isaquesoares.financeapp.model;
 
 import java.io.Serializable;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import javax.persistence.Id;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
-
-@Document(collection = "user")
+@Entity
+@Table(name = "user")
 public class User implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id; // ID agora está correto como Long
     private String name;
     private String cpf;
     private String dataNasc;
@@ -26,7 +30,7 @@ public class User implements Serializable {
     public User() {
     }
 
-    public User(String id, String name, String cpf, String dataNasc, String sexo, String telefone,
+    public User(Long id, String name, String cpf, String dataNasc, String sexo, String telefone,
             String cep, String endereco, String bairro, String cidade,
             String email, String password) {
         this.id = id;
@@ -44,11 +48,11 @@ public class User implements Serializable {
     }
 
     // Getters e Setters
-    public String getId() {
+    public Long getId() { // Agora retorna Long corretamente
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) { // Agora recebe Long corretamente
         this.id = id;
     }
 
@@ -171,5 +175,4 @@ public class User implements Serializable {
                 + ", telefone=" + telefone + ", cep=" + cep + ", endereco=" + endereco + ", bairro=" + bairro
                 + ", cidade=" + cidade + ", email=" + email + ", password=" + password + "]";
     }
-
 }
