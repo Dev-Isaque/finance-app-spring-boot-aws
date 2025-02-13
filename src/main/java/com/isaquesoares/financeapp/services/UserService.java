@@ -1,36 +1,41 @@
 package com.isaquesoares.financeapp.services;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.isaquesoares.financeapp.model.User;
+import com.isaquesoares.financeapp.model.dto.LoginResponseDTO;
 import com.isaquesoares.financeapp.model.dto.UserDTO;
 import com.isaquesoares.financeapp.repository.UserRepository;
 
 @Service
 public class UserService {
 
-    @Autowired
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
+    private final BCryptPasswordEncoder passwordEncoder;
+
+    public UserService(UserRepository userRepository, BCryptPasswordEncoder passwordEncoder) {
+        this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
+    }
 
     public List<User> findAll() {
         return userRepository.findAll();
     }
 
     public boolean register(UserDTO userDTO) {
-        if (userDTO == null || userDTO.getEmail() == null || userDTO.getEmail().trim().isEmpty()) {
+        if (userDTO == null || userDTO.getEmail() == null || userDTO.getPassword() == null ||
+                userDTO.getEmail().trim().isEmpty() || userDTO.getPassword().trim().isEmpty()) {
             return false;
         }
+
         String emailLower = userDTO.getEmail().trim().toLowerCase();
-        // Verifica se o usuário já existe pelo e-mail
-        Optional<User> existingUser = userRepository.findByEmail(emailLower);
-        if (existingUser.isPresent()) {
-            return false;
+
+        if (userRepository.findByEmail(emailLower).isPresent()) {
+            return false; // Usuário já existe
         }
 
         User newUser = new User(
@@ -45,30 +50,25 @@ public class UserService {
                 userDTO.getBairro(),
                 userDTO.getCidade(),
                 emailLower,
-                userDTO.getPassword());
+                passwordEncoder.encode(userDTO.getPassword()) // Criptografa a senha
+        );
 
         userRepository.save(newUser);
         return true;
     }
 
-    public Map<String, String> login(String email, String password) {
-        Map<String, String> response = new HashMap<>();
-
+    public LoginResponseDTO login(String email, String password) {
         if (email == null || password == null || email.trim().isEmpty() || password.trim().isEmpty()) {
-            response.put("message", "E-mail e senha são obrigatórios!");
-            return response;
+            return new LoginResponseDTO("E-mail e senha são obrigatórios!", null);
         }
 
         String emailLower = email.trim().toLowerCase();
         Optional<User> userOptional = userRepository.findByEmail(emailLower);
 
-        if (userOptional.isPresent() && userOptional.get().getPassword().equals(password)) {
-            response.put("message", "Login realizado com sucesso!");
-            response.put("userId", userOptional.get().getId());
+        if (userOptional.isPresent() && passwordEncoder.matches(password, userOptional.get().getPassword())) {
+            return new LoginResponseDTO("Login realizado com sucesso!", String.valueOf(userOptional.get().getId()));
         } else {
-            response.put("message", "E-mail ou senha inválidos!");
+            return new LoginResponseDTO("E-mail ou senha inválidos!", null);
         }
-
-        return response;
     }
 }

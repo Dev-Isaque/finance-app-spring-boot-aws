@@ -1,7 +1,11 @@
 package com.isaquesoares.financeapp.model.dto;
 
 import com.isaquesoares.financeapp.model.User;
-import lombok.*;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Getter
 @Setter
@@ -19,6 +23,7 @@ public class UserDTO {
     private String bairro;
     private String cidade;
     private String email;
+    private String password;
 
     public UserDTO(User user) {
         this.id = user.getId();
@@ -32,5 +37,6 @@ public class UserDTO {
         this.bairro = user.getBairro();
         this.cidade = user.getCidade();
         this.email = user.getEmail();
+        this.password = user.getPassword();
     }
 }
