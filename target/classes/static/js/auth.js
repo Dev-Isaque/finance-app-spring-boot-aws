@@ -2,7 +2,7 @@ function login() {
     var userData = {
         email: $("#email").val(),
         password: $("#password").val()
-    }
+    };
 
     $.ajax({
         url: "http://localhost:8080/users/login",
@@ -14,7 +14,12 @@ function login() {
             console.log("Resposta do backend:", response);
             alert(response.message);
 
-            window.location.replace("/index");
+            if (response.userId) {
+                sessionStorage.setItem("userId", response.userId); 
+                window.location.replace("/index");
+            } else {
+                alert("Erro ao login: ID do usuário não encontrado na resposta.");
+            }
         },
         error: function(xhr) {
             console.error("Erro ao login:", xhr.responseText);
@@ -27,6 +32,7 @@ function login() {
         }
     });
 }
+
 
 function register() {
     var userData = {

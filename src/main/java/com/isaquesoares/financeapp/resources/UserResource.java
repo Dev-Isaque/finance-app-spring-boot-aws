@@ -53,4 +53,19 @@ public class UserResource {
         response.put("message", success ? "Usuário cadastrado com sucesso!" : "Erro: Usuário já cadastrado!");
         return success ? ResponseEntity.ok(response) : ResponseEntity.badRequest().body(response);
     }
+
+    @GetMapping("/me/id")
+    public ResponseEntity<Map<String, Object>> getUserId(@RequestParam String email) {
+        User user = service.findByEmail(email);
+
+        if (user == null) {
+            return ResponseEntity.notFound().build();
+        }
+
+        Map<String, Object> response = new HashMap<>();
+        response.put("id", user.getId());
+
+        return ResponseEntity.ok(response);
+    }
+
 }

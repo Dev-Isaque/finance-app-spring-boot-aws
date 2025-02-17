@@ -9,7 +9,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "user")
+@Table(name = "users")
 public class User implements Serializable {
     private static final long serialVersionUID = 1L;
 
@@ -49,11 +49,11 @@ public class User implements Serializable {
     }
 
     // Getters e Setters
-    public Long getId() { // Agora retorna Long corretamente
+    public Long getId() {
         return id;
     }
 
-    public void setId(Long id) { // Agora recebe Long corretamente
+    public void setId(Long id) {
         this.id = id;
     }
 

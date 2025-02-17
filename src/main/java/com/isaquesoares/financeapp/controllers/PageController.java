@@ -32,4 +32,10 @@ public class PageController {
         model.addAttribute("title", "Dashboard - FinanceApp");
         return "index";
     }
+
+    @GetMapping("/adicionar-transacao")
+    public String showAdicionarTransacaoPage(Model model) {
+        model.addAttribute("title", "Adiconar Transação - FinanceApp");
+        return "adicionar-transacao";
+    }
 }

@@ -21,6 +21,7 @@
     display: flex;
     flex-direction: column; 
     justify-content: space-between; 
+    z-index: 10;
 }
 
 .sidebar.open {
@@ -34,11 +35,6 @@
     justify-content: space-between;
     padding: 10px;
     color: white;
-}
-
-.sidebar .logo-content {
-    display: flex;
-    align-items: center;
 }
 
 .sidebar .logo {
@@ -166,15 +162,30 @@
     margin-left: auto;
 }
 
-/* ===== SEÇÃO PRINCIPAL ===== */
-.home-section {
-    margin-left: 70px;
+/* ===== CONTEÚDO PRINCIPAL ===== */
+main.container {
+    position: relative;
+    margin-left: 75px;
+    transition: margin-left 0.4s ease-in-out;
     padding: 20px;
-    transition: margin-left 0.4s;
 }
 
-.sidebar.open ~ .home-section {
+/* Quando o sidebar estiver expandido */
+.sidebar.open ~ main.container {
     margin-left: 250px;
+}
+
+/* Ajusta os gráficos para não ultrapassarem os limites */
+canvas {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Garante que os gráficos fiquem dentro do espaço disponível */
+.col-md-6, .col-md-12 {
+    max-width: 100%;
+    overflow: hidden;
 }
 
 /* ===== RESPONSIVO ===== */
@@ -182,6 +193,7 @@
     .home-section {
         margin-left: 70px;
     }
+
     .sidebar.open ~ .home-section {
         margin-left: 250px;
     }

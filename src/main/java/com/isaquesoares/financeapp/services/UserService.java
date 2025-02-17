@@ -71,4 +71,12 @@ public class UserService {
             return new LoginResponseDTO("E-mail ou senha inválidos!", null);
         }
     }
+
+    public User findByEmail(String email) {
+        return userRepository.findByEmail(email).orElse(null);
+    }
+
+    public User findById(Long id) {
+        return userRepository.findById(id).orElse(null);
+    }
 }
